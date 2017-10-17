@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 21
-    buildToolsVersion "21.1.0"
+    compileSdkVersion 26
+    buildToolsVersion "26.0.2"
 
     defaultConfig {
         applicationId "ai.tgbot"
-        minSdkVersion 14
-        targetSdkVersion 21
+        minSdkVersion 5
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
     }
@@ -20,7 +20,8 @@ android {
 }
 
 dependencies {
-	compile 'com.android.support:support-v4:25.3.1'
+    //noinspection GradleCompatible
+    compile 'com.android.support:support-v4:24.1.1'
 	compile 'com.loopj.android:android-async-http:1.4.9'
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }
