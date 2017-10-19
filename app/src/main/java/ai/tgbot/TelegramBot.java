@@ -22,6 +22,7 @@ import org.json.JSONObject;
 
 import java.util.Locale;
 
+import ai.tgbot.ui.MainActivity;
 import cz.msebera.android.httpclient.Header;
 
 /**

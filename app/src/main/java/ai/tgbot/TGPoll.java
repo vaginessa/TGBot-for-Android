@@ -7,7 +7,8 @@ import android.os.*;
 
 import android.support.v4.app.NotificationCompat;
 import android.app.Notification;
-import android.support.v4.app.NotificationManagerCompat;
+
+import ai.tgbot.ui.MainActivity;
 
 /*
  TGBot for Android
