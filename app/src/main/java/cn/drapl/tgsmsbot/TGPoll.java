@@ -1,4 +1,4 @@
-package ai.tgbot;
+package cn.drapl.tgsmsbot;
 
 import android.app.PendingIntent;
 import android.app.Service;
@@ -8,7 +8,7 @@ import android.os.*;
 import android.support.v4.app.NotificationCompat;
 import android.app.Notification;
 
-import ai.tgbot.ui.MainActivity;
+import cn.drapl.tgsmsbot.ui.MainActivity;
 
 /*
  TGBot for Android

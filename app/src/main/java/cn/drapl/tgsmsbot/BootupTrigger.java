@@ -1,4 +1,4 @@
-package ai.tgbot;
+package cn.drapl.tgsmsbot;
 import android.content.BroadcastReceiver;
 import android.content.*;
 /*

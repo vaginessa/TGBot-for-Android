@@ -1,4 +1,4 @@
-package ai.tgbot.ui;
+package cn.drapl.tgsmsbot.ui;
 
 import android.os.*;
 import android.support.v7.app.AppCompatActivity;
@@ -6,8 +6,8 @@ import android.view.*;
 import android.content.Intent;
 import android.widget.Button;
 
-import ai.tgbot.R;
-import ai.tgbot.TGPoll;
+import cn.drapl.tgsmsbot.R;
+import cn.drapl.tgsmsbot.TGPoll;
 
 /*
 TGBot for Android

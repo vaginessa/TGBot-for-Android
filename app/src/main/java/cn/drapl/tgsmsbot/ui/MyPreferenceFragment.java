@@ -1,9 +1,9 @@
-package ai.tgbot.ui;
+package cn.drapl.tgsmsbot.ui;
 
 import android.os.Bundle;
 import android.support.v7.preference.PreferenceFragmentCompat;
 
-import ai.tgbot.R;
+import cn.drapl.tgsmsbot.R;
 
 /**
  * Created by draplater on 2017/10/17.

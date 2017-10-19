@@ -1,10 +1,10 @@
-package ai.tgbot.ui;
+package cn.drapl.tgsmsbot.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import ai.tgbot.R;
-import ai.tgbot.TGPoll;
+import cn.drapl.tgsmsbot.R;
+import cn.drapl.tgsmsbot.TGPoll;
 
 /**
  * Created by draplater on 2017/10/19.

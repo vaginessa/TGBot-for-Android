@@ -1,4 +1,4 @@
-package ai.tgbot;
+package cn.drapl.tgsmsbot;
 
 import android.app.Notification;
 import android.app.PendingIntent;
@@ -22,7 +22,7 @@ import org.json.JSONObject;
 
 import java.util.Locale;
 
-import ai.tgbot.ui.MainActivity;
+import cn.drapl.tgsmsbot.ui.MainActivity;
 import cz.msebera.android.httpclient.Header;
 
 /**

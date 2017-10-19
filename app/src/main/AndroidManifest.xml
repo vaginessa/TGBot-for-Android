@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="ai.tgbot" >
+    package="cn.drapl.tgsmsbot" >
 	<uses-permission android:name="android.permission.INTERNET"/>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
@@ -16,7 +16,7 @@
         android:fullBackupContent="@xml/backup_descriptor"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".ui.MainActivity"
+            android:name="cn.drapl.tgsmsbot.ui.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,22 +24,22 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.SettingActivity"
+            android:name="cn.drapl.tgsmsbot.ui.SettingActivity"
             android:label="Bot Settings" >
         </activity>
 		<receiver
-			android:name=".NetTrigger">
+			android:name="cn.drapl.tgsmsbot.NetTrigger">
 			<intent-filter>
 				<action android:name="android.net.conn.CONNECTIVITY_CHANGE"
                     tools:ignore="BatteryLife" />
 			</intent-filter>
 		</receiver>
-		<receiver android:name=".BootupTrigger">
+		<receiver android:name="cn.drapl.tgsmsbot.BootupTrigger">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".Receiver"
+        <receiver android:name="cn.drapl.tgsmsbot.Receiver"
             android:permission="android.permission.BROADCAST_SMS">
             <intent-filter android:priority="1000">
                 <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
@@ -49,7 +49,7 @@
                 <action android:name="android.intent.action.ACTION_BATTERY_OKAY"/>
             </intent-filter>
         </receiver>
-		<service android:name=".TGPoll" />
+		<service android:name="cn.drapl.tgsmsbot.TGPoll" />
     </application>
 
 </manifest>

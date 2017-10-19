@@ -1,4 +1,4 @@
-package ai.tgbot;
+package cn.drapl.tgsmsbot;
 /*
  TGBot for Android
  Agus Ibrahim

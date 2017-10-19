@@ -1,8 +1,8 @@
-package ai.tgbot;
+package cn.drapl.tgsmsbot;
 
 import android.content.*;
 import android.net.*;
-import java.util.*;
+
 /*
  TGBot for Android
  Agus Ibrahim
