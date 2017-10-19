@@ -1,15 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    compileSdkVersion 24
+    buildToolsVersion '25.0.0'
 
     defaultConfig {
         applicationId "ai.tgbot"
-        minSdkVersion 5
-        targetSdkVersion 26
+        minSdkVersion 9
+        targetSdkVersion 24
         versionCode 1
         versionName "1.0"
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
@@ -21,7 +22,10 @@ android {
 
 dependencies {
     //noinspection GradleCompatible
-    compile 'com.android.support:support-v4:24.1.1'
-	compile 'com.loopj.android:android-async-http:1.4.9'
+    compile 'com.android.support:support-v4:25.4.0'
+    compile 'com.android.support:appcompat-v7:25.4.0'
+    compile 'com.android.support:design:25.4.0'
+    compile 'com.android.support:preference-v7:25.4.0'
+    compile 'com.loopj.android:android-async-http:1.4.9'
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }
