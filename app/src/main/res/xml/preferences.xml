@@ -5,4 +5,9 @@
         android:title="API Key"
         android:persistent="true"
         android:defaultValue=""/>
+    <EditTextPreference
+        android:key="user_name"
+        android:title="User Name"
+        android:persistent="true"
+        android:defaultValue=""/>
 </PreferenceScreen>

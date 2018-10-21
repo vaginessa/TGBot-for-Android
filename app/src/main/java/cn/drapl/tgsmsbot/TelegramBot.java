@@ -1,14 +1,10 @@
 package cn.drapl.tgsmsbot;
 
-import android.app.Notification;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.BatteryManager;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.preference.PreferenceManager;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -34,6 +30,7 @@ public class TelegramBot extends JsonHttpResponseHandler {
     private final AsyncHttpClient client;
     private final Context context;
     private final String api_key;
+    private final String user_name;
     private String userid;
     private String UPDATES_URL =
             "https://api.telegram.org/bot%s/getUpdates?limit=1&offset=%d&timeout=55";
@@ -41,20 +38,9 @@ public class TelegramBot extends JsonHttpResponseHandler {
     TelegramBot(Context context) {
         this.context = context;
         this.pref = PreferenceManager.getDefaultSharedPreferences(context);
-        this.userid = pref.getString("user_id", "");
+        this.user_name = pref.getString("user_name", "");
+        this.userid = pref.getString("user_id_" + user_name, "");
         this.api_key = pref.getString("api_key", "");
-        if(this.api_key.length() == 0) {
-            NotificationManagerCompat notiMan = NotificationManagerCompat.from(context);
-            Intent notificationIntent = new Intent(context, MainActivity.class);
-            Notification noti = new NotificationCompat.Builder(context)
-                    .setContentText("No API Key!")
-                    .setContentIntent(PendingIntent.getActivity(
-                            context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT
-                    ))
-                    .setSmallIcon(R.drawable.ic_launcher)
-                    .build();
-            notiMan.notify(2, noti);
-        }
         client = new AsyncHttpClient();
         client.setTimeout(60000);
         client.setConnectTimeout(60000);
@@ -112,12 +98,12 @@ public class TelegramBot extends JsonHttpResponseHandler {
                 String from_id = msgfrom.getString("id");
                 android.util.Log.d(Constant.TAG,
                         String.format("Username: %s, ID: %s", from_username, from_id));
-                if (!from_username.equals(Constant.USERNAME)) {
+                if (!from_username.equals(this.user_name)) {
                     android.util.Log.d(Constant.TAG, "Invalid Username " + from_username);
                 } else if (!userid.equals(from_id)) {
                     userid = from_id;
                     ed = pref.edit();
-                    ed.putString("user_id", userid);
+                    ed.putString("user_id_" + user_name, userid);
                     ed.commit();
                 }
                 String msg = reslst.getJSONObject(0).getJSONObject("message").getString("text");

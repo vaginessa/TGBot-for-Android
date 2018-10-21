@@ -7,6 +7,7 @@ import android.os.*;
 
 import android.support.v4.app.NotificationCompat;
 import android.app.Notification;
+import android.support.v7.preference.PreferenceManager;
 
 import cn.drapl.tgsmsbot.ui.MainActivity;
 
@@ -49,5 +50,18 @@ public class TGPoll extends Service {
         startForeground(1, notification);
         super.onStartCommand(intent, flags, startId);
         return START_STICKY;
+    }
+
+    public static String checkConfig(Context context) {
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
+        String api_key = pref.getString("api_key", "");
+        if(api_key.length() == 0) {
+            return "Invalid API Key!";
+        }
+        String user_name = pref.getString("user_name", "");
+        if(user_name.length() == 0) {
+            return "Invalid Username!";
+        }
+        return "";
     }
 }

@@ -1,6 +1,7 @@
 package cn.drapl.tgsmsbot.ui;
 
 import android.os.*;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.*;
 import android.content.Intent;
@@ -24,8 +25,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.main);
         Button startBtn = (Button) findViewById(R.id.btn_start);
         startBtn.setOnClickListener(v -> {
-                Intent startIntent = new Intent(MainActivity.this, TGPoll.class);
-                startService(startIntent);
+            String errMsg = TGPoll.checkConfig(MainActivity.this);
+            if(errMsg.length() != 0) {
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(
+                        MainActivity.this)
+                        .setMessage(errMsg)
+                        .setPositiveButton("OK", ((dialog, which) -> {dialog.cancel();}));
+                builder1.create().show();
+                return;
+            }
+            Intent startIntent = new Intent(MainActivity.this, TGPoll.class);
+            startService(startIntent);
         });
 
         Button stopBtn = (Button) findViewById(R.id.btn_stop);
