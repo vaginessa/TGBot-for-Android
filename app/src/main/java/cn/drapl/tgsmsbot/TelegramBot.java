@@ -48,8 +48,12 @@ public class TelegramBot extends JsonHttpResponseHandler {
     }
 
     void startListening() {
-        int lastUpdate = pref.getInt("update_id", -2);
-        client.get(String.format(UPDATES_URL, api_key, lastUpdate + 1), null, this);
+        new android.os.Handler().postDelayed(() -> {
+            int lastUpdate = pref.getInt("update_id", -2);
+            client.get(String.format(UPDATES_URL, api_key, lastUpdate + 1),
+                    null, TelegramBot.this);
+            android.util.Log.d(Constant.TAG, "Check for Update " + System.currentTimeMillis());
+        }, Constant.POLLING_INTERVAL);
     }
 
     private void handleMsg(String msg) throws JSONException {
@@ -68,13 +72,7 @@ public class TelegramBot extends JsonHttpResponseHandler {
     @Override
     public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
         int lastUpdate = pref.getInt("update_id", -2);
-
-        new android.os.Handler().postDelayed(() -> {
-            int lastUpdate1 = pref.getInt("update_id", -2);
-            client.get(String.format(UPDATES_URL, api_key, lastUpdate1 + 1),
-                    null, TelegramBot.this);
-            android.util.Log.d(Constant.TAG, "Check for Update " + System.currentTimeMillis());
-        }, Constant.POLLING_INTERVAL);
+        this.startListening();
 
         try {
             JSONArray reslst = res.getJSONArray("result");
@@ -114,33 +112,25 @@ public class TelegramBot extends JsonHttpResponseHandler {
     @Override
     public void onFailure(int statusCode, Header[] headers, String res, Throwable t) {
         android.util.Log.d(Constant.TAG, "Check Error: " + t.getMessage());
-        new android.os.Handler().postDelayed(() -> {
-            int lastUpdate = pref.getInt("update_id", -2);
-            client.get(String.format(UPDATES_URL, api_key, lastUpdate + 1), null, TelegramBot.this);
-            android.util.Log.d(Constant.TAG, "Check for Update " + System.currentTimeMillis());
-        }, Constant.POLLING_INTERVAL);
+        this.startListening();
     }
 
     @Override
     public void onFailure(int statusCode, Header[] headers, Throwable t, JSONObject res) {
         android.util.Log.d(Constant.TAG, "Check Error: " + t.getMessage());
+        this.startListening();
+
         if(res != null) {
             android.util.Log.d(Constant.TAG, res.toString());
         } else {
             return;
         }
+
         if(res.optInt("error_code", -1) == 404) {
             SharedPreferences.Editor ed = pref.edit();
             ed.putString("api_key", "");
             ed.commit();
-            return;
         }
-
-        new android.os.Handler().postDelayed(() -> {
-            int lastUpdate = pref.getInt("update_id", -2);
-            client.get(String.format(UPDATES_URL, api_key, lastUpdate + 1), null, TelegramBot.this);
-            android.util.Log.d(Constant.TAG, "Check for Update " + System.currentTimeMillis());
-        }, Constant.POLLING_INTERVAL);
     }
 
     public void sendMsg(String msg) {
