@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
                 AlertDialog.Builder builder1 = new AlertDialog.Builder(
                         MainActivity.this)
                         .setMessage(errMsg)
-                        .setPositiveButton("OK", ((dialog, which) -> {dialog.cancel();}));
+                        .setPositiveButton("OK", ((dialog, which) -> dialog.cancel()));
                 builder1.create().show();
                 return;
             }

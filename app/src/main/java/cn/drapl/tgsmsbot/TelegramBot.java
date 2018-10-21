@@ -69,14 +69,11 @@ public class TelegramBot extends JsonHttpResponseHandler {
     public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
         int lastUpdate = pref.getInt("update_id", -2);
 
-        new android.os.Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                int lastUpdate = pref.getInt("update_id", -2);
-                client.get(String.format(UPDATES_URL, api_key, lastUpdate + 1),
-                        null, TelegramBot.this);
-                android.util.Log.d(Constant.TAG, "Check for Update " + System.currentTimeMillis());
-            }
+        new android.os.Handler().postDelayed(() -> {
+            int lastUpdate1 = pref.getInt("update_id", -2);
+            client.get(String.format(UPDATES_URL, api_key, lastUpdate1 + 1),
+                    null, TelegramBot.this);
+            android.util.Log.d(Constant.TAG, "Check for Update " + System.currentTimeMillis());
         }, Constant.POLLING_INTERVAL);
 
         try {
@@ -117,13 +114,10 @@ public class TelegramBot extends JsonHttpResponseHandler {
     @Override
     public void onFailure(int statusCode, Header[] headers, String res, Throwable t) {
         android.util.Log.d(Constant.TAG, "Check Error: " + t.getMessage());
-        new android.os.Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                int lastUpdate = pref.getInt("update_id", -2);
-                client.get(String.format(UPDATES_URL, api_key, lastUpdate + 1), null, TelegramBot.this);
-                android.util.Log.d(Constant.TAG, "Check for Update " + System.currentTimeMillis());
-            }
+        new android.os.Handler().postDelayed(() -> {
+            int lastUpdate = pref.getInt("update_id", -2);
+            client.get(String.format(UPDATES_URL, api_key, lastUpdate + 1), null, TelegramBot.this);
+            android.util.Log.d(Constant.TAG, "Check for Update " + System.currentTimeMillis());
         }, Constant.POLLING_INTERVAL);
     }
 
@@ -142,13 +136,10 @@ public class TelegramBot extends JsonHttpResponseHandler {
             return;
         }
 
-        new android.os.Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                int lastUpdate = pref.getInt("update_id", -2);
-                client.get(String.format(UPDATES_URL, api_key, lastUpdate + 1), null, TelegramBot.this);
-                android.util.Log.d(Constant.TAG, "Check for Update " + System.currentTimeMillis());
-            }
+        new android.os.Handler().postDelayed(() -> {
+            int lastUpdate = pref.getInt("update_id", -2);
+            client.get(String.format(UPDATES_URL, api_key, lastUpdate + 1), null, TelegramBot.this);
+            android.util.Log.d(Constant.TAG, "Check for Update " + System.currentTimeMillis());
         }, Constant.POLLING_INTERVAL);
     }
 
